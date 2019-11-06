@@ -113,16 +113,6 @@ export class AppComponent implements OnInit {
 
 
 class Mentionify {
-  ref: any;
-  menuRef: any;
-  resolveFn: any;
-  replaceFn: any;
-  menuItemFn: any;
-  options: any[];
-  left: any;
-  top: any;
-  triggerIdx: any;
-  active: number;
   constructor(ref, menuRef, resolveFn, replaceFn, menuItemFn) {
     this.ref = ref
     this.menuRef = menuRef
@@ -141,6 +131,18 @@ class Mentionify {
     this.ref.addEventListener('input', this.onInput)
     this.ref.addEventListener('keydown', this.onKeyDown)
   }
+  ref: any;
+  menuRef: any;
+  resolveFn: any;
+  replaceFn: any;
+  menuItemFn: any;
+  options: any[];
+  left: any;
+  top: any;
+  triggerIdx: any;
+  active: number;
+  textarea: any;
+  query: any;
   
   async makeOptions(query) {
     const options = await this.resolveFn(query)
@@ -168,15 +170,16 @@ class Mentionify {
       const option = this.options[active]
       const mention = this.replaceFn(option, this.ref.value[this.triggerIdx])
       const postMention = this.ref.value.substr(this.ref.selectionStart)
-      const newValue = `${preMention}${mention}${postMention}`
-      this.ref.value = newValue
-      const caretPosition = this.ref.value.length - postMention.length
+      const newValue = `${preMention}${mention}${postMention}`;
+      newValue.replace(this.query, '');
+      this.ref.value = newValue;
+      this.textarea = document.getElementById("textarea");
+      const caretPosition = this.ref.value.length - postMention.length;
       this.ref.setSelectionRange(caretPosition, caretPosition)
-      this.closeMenu()
-      this.ref.focus()
+      this.closeMenu();
+      this.ref.focus();
     }
   }
-  
   onInput(ev) {
     const positionIndex = this.ref.selectionStart;
     const textBeforeCaret = this.ref.value.slice(0, positionIndex);
@@ -190,7 +193,6 @@ class Mentionify {
     let triggerIdx2: number;
     let maybeTrigger2;
     let keystrokeTriggered;
-    let query;
     const maybeTrigger = textBeforeCaret[triggerIdx];
     if (preLastToken) {
       triggerIdx2 = textBeforeCaret.length - lastToken.length - preLastToken.length - 1;
@@ -209,11 +211,13 @@ class Mentionify {
     }
     console.log(triggerIdx + 1);
     if (maybeTrigger2 === '@') {
-      query = textBeforeCaret.slice(triggerIdx2 + 1);
+      this.triggerIdx = triggerIdx2;
+      this.query = textBeforeCaret.slice(triggerIdx2 + 1);
     } else {
-      query = textBeforeCaret.slice(triggerIdx + 1);
+      this.triggerIdx = triggerIdx;
+      this.query = textBeforeCaret.slice(triggerIdx + 1);
     }
-    this.makeOptions(query)
+    this.makeOptions(this.query)
     
     let mc = new AppComponent;
     const coords = mc.getCaretCoordinates(this.ref, positionIndex)
@@ -223,7 +227,7 @@ class Mentionify {
       this.active = 0
       this.left = window.scrollX  + coords.left + left + this.ref.scrollLeft;
       this.top = window.scrollY +  coords.top + top + coords.height - this.ref.scrollTop;
-      this.triggerIdx = triggerIdx
+      // this.triggerIdx = triggerIdx
       this.renderMenu()
     }, 0)
   }
@@ -287,22 +291,21 @@ const users = [
 
 const resolveFn = prefix => prefix === ''
   ? users
-  : users.filter(user => user.username.startsWith(prefix));
+  : users.filter(user => user.username.includes(prefix));
 
-const replaceFn = (user, trigger) => `${trigger}${user.username} `;
+const replaceFn = (user, trigger) =>`${trigger}${user.username}`;
 
 const menuItemFn = (user, setItem, selected) => {
   const div = document.createElement('div')
   div.setAttribute('role', 'option')
   div.className = 'menu'
   if (selected) {
-    div.classList.add('btn-primary');
+    div.classList.add('alert-secondary');
     div.setAttribute('aria-selected', '');
 
   }
-  div.textContent = user.username;
+  div.textContent =  user.username;
   div.onclick = setItem;
-  div.onkeydown = setItem; 
   // div.onkeypress = setItem;
   return div;
 }
