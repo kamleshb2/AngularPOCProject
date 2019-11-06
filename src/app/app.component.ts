@@ -141,7 +141,6 @@ class Mentionify {
   top: any;
   triggerIdx: any;
   active: number;
-  textarea: any;
   query: any;
   
   async makeOptions(query) {
@@ -173,7 +172,6 @@ class Mentionify {
       const newValue = `${preMention}${mention}${postMention}`;
       newValue.replace(this.query, '');
       this.ref.value = newValue;
-      this.textarea = document.getElementById("textarea");
       const caretPosition = this.ref.value.length - postMention.length;
       this.ref.setSelectionRange(caretPosition, caretPosition)
       this.closeMenu();
