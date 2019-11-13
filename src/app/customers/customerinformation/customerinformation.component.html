@@ -1,0 +1,31 @@
+
+<!-- <h2>Customer Details</h2>
+<div>
+    <a routerLinkActive="active" routerLink="customer-details/{{customerid}}" >Customer Details</a>
+  <a  routerLinkActive="active" routerLink="customer-orders/{{customerid}}"> Customer Orders</a>
+    <a routerLinkActive="active" routerLink="editcustomer/{{customerid}}"> Edit Customers</a>
+ </div>
+
+ <router-outlet (activate) = 'onActivate($event)'></router-outlet> -->
+ <!-- <html lang="en">
+    <head>
+      <title>Bootstrap Example</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    </head> -->
+    
+ <div class="container">
+    
+    <br> <br> 
+    <ul class="nav nav-tabs">
+        <li class="nav-item" ><a class="nav-link active" routerLinkActive="active" routerLink="customer-details/{{customerid}}" ><i class="fa fa-address-book-o" aria-hidden="true"></i> Customer Details</a></li>
+      <li class="nav-item"><a class="nav-link active" routerLinkActive="active" routerLink="customer-orders/{{customerid}}"> <i class="fa fa-book" aria-hidden="true"></i>Customer Orders</a></li>
+      <li class="nav-item"><a class="nav-link active" routerLinkActive="active" routerLink="editcustomer/{{customerid}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit Customers</a></li>
+    </ul>
+  </div>
+  <router-outlet (activate) = 'onActivate($event)'></router-outlet>
+
+

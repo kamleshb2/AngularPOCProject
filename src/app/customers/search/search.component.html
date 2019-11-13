@@ -1,0 +1,21 @@
+<div>
+ 
+    <mat-form-field>
+      <input matInput placeholder="Search" class="form-control mr-sm-2" aria-label="State" [matAutocomplete]="auto" [formControl]="searchMoviesCtrl">
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+        <mat-option *ngIf="isLoading" class="is-loading">Loading...</mat-option>
+        <ng-container *ngIf="!isLoading">
+          <mat-option  *ngFor="let movie of filteredMovies" [value]="movie.firstName + ' ' +  movie.lastName">
+            <span><b>{{movie.firstName}}</b> {{movie.lastName}}</span>
+          </mat-option>
+        </ng-container>
+      </mat-autocomplete>
+    </mat-form-field>
+   
+    <br>
+   
+  <ng-container *ngIf="errorMsg; else elseTemplate">
+    {{errorMsg}}
+  </ng-container>
+
+  </div>

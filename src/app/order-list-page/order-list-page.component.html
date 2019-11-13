@@ -1,0 +1,34 @@
+
+<br><br><div class="container" *ngFor = "let customer of customers">
+    <h3 style="color:mediumblue">{{customer.firstName}}  {{customer.lastName}}</h3>
+<table class="table table-bordered" style="width:100%">
+        
+        <thead>
+            <tr class="table table-primary">
+              
+              <th>Product</th>
+              <th>Date</th>
+              <th>Quantity</th>
+              <th>Unit Price</th>
+              <th>Total</th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let order of orders">
+            
+                <tr *ngIf="customer.id == order.customerid ">
+                    <td style="width: 20%" >{{order.product}}</td>
+                    <td style="width: 20%">{{order.date}}</td>
+                    <td style="width: 20%">{{order.quantity}}</td>
+                    <td style="width: 20%">{{order.unitprice | currency:'INR'}}</td>
+                    <td style="width: 20%">{{order.unitprice * order.quantity | currency:'INR'}}</td>
+                </tr>
+                
+           
+
+        </tbody>
+        <tr>
+            <td colspan="4"></td>
+             <td><b>{{customerTotal[customer.id] | currency:'INR'}}</b> </td>
+        </tr>
+       </table><br>
+    </div>

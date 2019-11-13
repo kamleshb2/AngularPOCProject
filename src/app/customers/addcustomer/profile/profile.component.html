@@ -1,0 +1,31 @@
+<form #accountform="ngForm" [formGroup] = "profileForm">
+    <!-- <div class="card card-primary">
+        <div class="card card-heading"><h2 class="card card-title">Login</h2><br></div>
+        <div class="card card-body"> -->
+
+<div class="form-group">
+    <label for="address">Address</label>
+    <input id="address" type="text" name="address" formControlName="address" class="form-control"><br>
+</div>
+
+<div class="form-group">
+        <label for="city">City</label>
+        <input id="city" type="text" name="city" formControlName="city" class="form-control"><br>
+</div>
+
+<div class="form-group">
+    
+    <label for="state">State</label>
+        <input id="state" type="text" name="state" formControlName="state" class="form-control"><br>
+
+</div>
+
+    <button type="button" class="btn btn-primary" (click)="previous()">previous</button>&nbsp;&nbsp;&nbsp;&nbsp;
+    <button type="button" class="btn btn-primary" (click)="next()">Next</button>
+ 
+    
+</form>
+
+<div class="container"><br>
+  <p-progressBar [value]="45"></p-progressBar>
+      </div>

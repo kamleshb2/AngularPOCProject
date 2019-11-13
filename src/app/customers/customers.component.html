@@ -1,0 +1,178 @@
+<!-- <p>customers works!</p>
+<a routerLink="maps"> Maps</a>
+<a routerLink="search"> Search</a>
+<router-outlet></router-outlet> -->
+
+
+
+<p-toast [style]="{marginTop: '80px'}"></p-toast>
+<h2> <i class="fa fa-user" aria-hidden="true"></i> Customers</h2>
+<button type="button" class="btn-primary" (click)="ViewType()"><i class="fa fa-list" aria-hidden="true" *ngIf="gridView"></i> <i class="fa fa-th" *ngIf="!gridView"></i> {{gridView?'List':'Grid'}} View</button>&nbsp;&nbsp;
+<button type="button" class="btn-primary" ><a routerLinkActive="active" routerLink="addcustomer" style="color: white"><i class="fa fa-plus-square" aria-hidden="true"></i> Add Customer</a></button>&nbsp;&nbsp;
+<app-search *ngIf="gridView" (filteredCustomer) = FilterCustomer($event) style="top: 75px; right: 15px; position: absolute;"></app-search>
+
+<div class="container-fluid" *ngIf="gridView">
+  <div class="row" *ngIf="customers">
+    <div class="col-4  mr-0.5 w-75 p-3" *ngFor="let customer of customers | paginate: config">
+      <div class="card card-primary">
+
+        <div class="card-heading">
+             <h3 class="card-title navbar navbar-dark bg-primary" style="color: white"><a  style="color: white" routerLink ="customer-information/customer-details/{{customer.id}}"  > {{customer.firstName}} {{customer.lastName}}</a> <button class="btn" (click)="edit(customer.id)"><i float="left" class='fa fa-edit'  style="color: white; font-size:36px"></i></button></h3>
+            </div>
+        
+        <div class="card-body">
+
+          <div class="col-10">
+
+            <div class="row vertical-align">
+                
+
+              <div class="col">
+
+                <div class="row">
+                  <div class="col-5">
+                    Gender
+                  </div>
+                  <div class="col">
+                    : {{customer.gender}}
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-5">
+                    Address
+                  </div>
+                  <div class="col">
+                    : {{customer.address}}
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-5">
+                    City
+                  </div>
+                  <div class="col">
+                    : {{customer.city}}
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-5">
+                    State
+                  </div>
+                  <div class="col">
+                    : {{customer.state}}
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-5">
+                    Email
+                  </div>
+                  <div class="col">
+                    : {{customer.email}}
+                  </div>
+                </div>
+
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+</div>
+
+  <!-- <div class="container" *ngIf="!gridView">
+
+    <table matSort (matSortChange) = "sortData($event)"  class="table table-bordered" style="width:100%">
+      <thead>
+        <tr class="table table-primary">
+          <th mat-sort-header = "first" >First Name</th>
+          <th mat-sort-header = "last">Last Name</th>
+          <th mat-sort-header = "gender">Gender</th>
+          <th >Address</th>
+          <th >City</th>
+          <th >State</th>
+          <th >Email</th>
+        </tr>
+      </thead>
+      <tbody>
+          <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+        <tr *ngFor="let customer of sortedData | paginate: config">
+          <td style="width: 10%">{{customer.firstName}}</td>
+          <td style="width: 10%">{{customer.lastName}}</td>
+          <td style="width: 10%">{{customer.gender}}</td>
+          <td style="width: 10%">{{customer.address}}</td>
+          <td style="width: 10%">{{customer.city}}</td>
+          <td style="width: 10%">{{customer.state}}</td>
+          <td style="width: 20%">{{customer.email}}</td>
+          <td style="width: 10%"><button class="btn btn-primary" (click)="edit(customer.id)">Edit</button></td>
+           <td style="width: 10%"><button class="btn btn-danger" (click)="deleteBook(customer.id)">Delete</button></td> 
+          
+
+          <hr />
+        </tr>
+      </tbody>
+    </table>
+  </div> -->
+
+  <div class="container-fluid" *ngIf="!gridView">
+    <br/>
+  <p-table #tt  [columns]="cols"  [value]="customers"  autoLayout="true" sortMode="multiple" [paginator]="true" [rows]="6" [scrollable]="true" scrollHeight="200px" (onPage)="paginate(tt)" >
+      <ng-template pTemplate="colgroup" let-columns>
+          <colgroup>
+              <col *ngFor="let col of columns" style="width:174px">
+          </colgroup>
+      </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+         
+          <th *ngFor="let col of cols" [pSortableColumn]="col.field">
+            {{col.header}}
+            <p-sortIcon [field]="col.field"></p-sortIcon>
+          </th>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr>
+           
+            <th *ngFor="let col of cols" [ngSwitch]="col.field">
+                <input style = 'width : 150px' *ngSwitchCase="'firstName'" pInputText type="text" (input)="tt.filter($event.target.value, col.field, col.filterMatchMode)">
+                <input style = 'width : 150px' *ngSwitchCase="'lastName'" pInputText type="text" (input)="tt.filter($event.target.value, col.field, col.filterMatchMode)">
+                <p-dropdown  *ngSwitchCase="'gender'" appendTo="body" [options]="genders" [style]="{'width':'100%', 'min-width':'100%'}" (onChange)="tt.filter($event.value, col.field, 'equals')"></p-dropdown>
+                <input style = 'width : 150px' *ngSwitchCase="'address'" pInputText type="text" (input)="tt.filter($event.target.value, col.field, col.filterMatchMode)">
+                <p-multiSelect appendTo="body" *ngSwitchCase="'city'" [options]="cities" defaultLabel="All Cities" (onChange)="tt.filter($event.value, col.field, 'in')"></p-multiSelect>
+                <p-multiSelect appendTo="body"*ngSwitchCase="'state'" [options]="states" defaultLabel="All States" (onChange)="tt.filter($event.value, col.field, 'in')"></p-multiSelect>
+                <input style = 'width : 150px' *ngSwitchCase="'email'" pInputText type="text" (input)="tt.filter($event.target.value, col.field, col.filterMatchMode)">
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+    </ng-template>
+    
+    <ng-template pTemplate="body" let-customer>
+        
+        <tr>
+          <!-- <td *ngFor="let col of cols">{{customer[col.field]}}</td> -->
+          <td ><a  style="color: black" routerLink ="customer-information/customer-details/{{customer.id}}"  >{{customer.firstName}}</a></td>
+          <td >{{customer.lastName}}</td>
+          <td >{{customer.gender}}</td>
+          <td >{{customer.address}}</td>
+          <td >{{customer.city}}</td>
+          <td >{{customer.state}}</td>
+          <td style="word-break:break-all">{{customer.email}}</td>
+          <td ><button class="btn btn-primary" (click)="edit(customer.id)">Edit</button></td>
+          <td> 
+              
+            <button type="button" (click)="deleteBook(customer.id)" pButton icon="pi pi-times" class="ui-button-danger" label="Delete"></button>
+            
+            <!-- <p-messages [value]="msgs" *ngIf = "customer.id == id"></p-messages> -->
+          </td>
+        </tr>
+    </ng-template>
+   
+</p-table>
+<p-confirmDialog [style]="{width: '50vw'}"  ></p-confirmDialog>
+</div>
+<br/>

@@ -1,0 +1,25 @@
+<table class="table table-bordered; container" style="width:100%">
+    <thead >
+        <tr class="table table-primary">
+          <th >Product</th>
+          <th>Date</th>
+          <th >Quantity</th>
+          <th >Unit Price</th>
+          <th >Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+         <tr *ngFor="let order of orders" >
+        <td style="width: 20%">{{order.product}}</td>
+          <td style="width: 20%">{{order.date}}</td>
+          <td style="width: 20%">{{order.quantity}}</td>
+          <td style="width: 20%">{{order.unitprice  | currency: 'INR'}}</td>
+          <td style="width: 20%">{{order.unitprice * order.quantity | currency:'INR'}}</td>
+        </tr>
+        <tr>
+          <td colspan="4"></td>
+            <td style="text-align: center"><b> {{total  | currency: 'INR'}} </b></td>
+        </tr>
+    </tbody>
+   </table>

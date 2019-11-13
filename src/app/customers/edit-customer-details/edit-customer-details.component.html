@@ -1,0 +1,88 @@
+<div class="container">
+
+    <div class="card card-head">
+        <h2><i class='fa fa-edit' style="font-size:36px"></i>  Edit Customer</h2>
+    </div>
+
+   <div class="card card-body">
+
+        <form *ngIf="editForm" [formGroup]="editForm" (ngSubmit)="edit()">
+
+        <h3>{{customer.firstName}} {{customer.lastName}}</h3>
+        <div class="form-group">
+                <label for="fname">First Name</label>
+                <input id="fname" type="text" formControlName="fname" name="fname" class="form-control"><br>
+            </div>
+            <div *ngIf="editForm.get('fname').errors?.required" class="alert alert-danger">
+                First Name is required.
+              </div>
+              <div *ngIf="editForm.get('fname').errors?.validString" class="alert alert-danger">
+                First Name cannot have a special character.
+              </div>
+    
+            <div class="form-group">
+                    <label for="lname">Last Name</label>
+                    <input id="lname" type="text" formControlName="lname" name="lname" class="form-control"><br>
+            </div>
+            <div *ngIf="editForm.get('lname').errors?.required" class="alert alert-danger">
+                Last Name is required.
+              </div>
+              <div *ngIf="editForm.get('lname').errors?.validString" class="alert alert-danger">
+                Last Name cannot have a special character.
+              </div>
+    
+            <!-- <div class="form-group">
+                <label for="gender">Gender</label>
+                <br>
+                &nbsp;<input id="gender" type="radio"  name="gender" formControlName="gender" value="Male" class="form-check-input">
+                <label class="form-check-label">&nbsp;&nbsp;&nbsp;Male</label><br>
+                &nbsp;<input id="gender" type="radio" name="gender" formControlName="gender" value="Female" class="form-check-input">
+                <label class="form-check-label">&nbsp;&nbsp;&nbsp;Female</label>
+    
+            </div> -->
+
+            <div class = "form-group">
+              <p-dropdown [options]="Gen" formControlName="gender"></p-dropdown>
+            </div>
+
+            <div *ngIf="editForm.get('gender').errors?.required" class="alert alert-danger">
+                Gender is required.
+              </div>
+
+            <div class="form-group">
+                    <label for="address">Address</label>
+                    <input id="address" type="text" formControlName="address" name="address" class="form-control"><br>
+                </div>
+                
+                <div class="form-group">
+                        <label for="city">City</label>
+                        <input id="city" type="text" formControlName="city" name="city" class="form-control"><br>
+                </div>
+                
+                <div class="form-group">
+                    
+                    <label for="state">State</label>
+                        <input id="state" type="text" formControlName="state" name="state" class="form-control"><br>
+                
+                </div>
+
+                <div class="form-group">
+                <label for="email">Email</label>
+                <input id="email" type="email" formControlName="email" name="email" class="form-control" required><br>
+                </div>
+                <div *ngIf="editForm.get('email').errors?.email" class="alert alert-danger">
+                    Email is invalid.
+                  </div>
+
+                <!-- <button type="submit"  class="btn btn-success" value="submit">Submit</button> -->
+                <p-toast [style]="{marginTop: '80px'}"></p-toast>
+                <button type="button" pButton (click)="edit()" label="Submit" class="ui-button-success"></button>&nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="button" class="btn btn-danger" (click)="cancel()">Cancel</button>
+
+            </form>
+
+    </div>
+
+
+</div>
+

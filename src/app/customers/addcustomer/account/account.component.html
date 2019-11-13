@@ -1,0 +1,59 @@
+
+        <form [formGroup]="accountForm" (ngSubmit)="next()">
+            <!-- <div class="card card-primary">
+                <div class="card card-heading"><h2 class="card card-title">Login</h2><br></div>
+                <div class="card card-body"> -->
+
+        <div class="form-group">
+            <label for="fname">First Name</label>
+            <input id="fname" [class.is-invalid]="(accountForm.get('fname').touched && accountForm.get('fname').invalid) ||
+                   accountForm.get('fname').errors?.validString " type="text" formControlName="fname" name="fname" class="form-control"><br>
+        
+
+        <small *ngIf="accountForm.get('fname').errors?.required && (accountForm.get('fname').touched || submitClicked) " class="alert alert-danger">
+          First Name is required.
+        </small>
+        <small *ngIf="accountForm.get('fname').errors?.validString && !accountForm.get('fname').errors?.required" class="alert alert-danger">
+          First Name cannot have a special character.
+        </small>
+      </div>
+
+        <div class="form-group">
+                <label for="lname">Last Name</label>
+                <input id="lname" [class.is-invalid]="(accountForm.get('lname').touched && accountForm.get('lname').invalid) ||
+                accountForm.get('lname').errors?.validString " type="text" formControlName="lname" name="lname" class="form-control"><br>
+        
+        <small *ngIf="accountForm.get('lname').errors?.required && (accountForm.get('lname').touched || submitClicked)" class="alert alert-danger">
+          Last Name is required.
+        </small>
+        <small *ngIf="accountForm.get('lname').errors?.validString && !accountForm.get('lname').errors?.required" class="alert alert-danger">
+          Last Name cannot have a special character.
+        </small>
+        </div>
+        <!-- <div class="form-group">
+            <label for="gender">Gender</label>
+            <br>
+            <input id="gender" type="radio" formControlName="gender" name="gender" value="Male" class="form-check-input">
+            <label class="form-check-label">Male</label><br>
+            <input id="gender" type="radio" formControlName="gender" name="gender" value="Female" class="form-check-input">
+            <label class="form-check-label">Female</label>
+        </div> -->
+        <div class = "form-group">
+        <p-dropdown [options]="Gen" formControlName="gender"></p-dropdown>
+      </div>
+
+        <div *ngIf="accountForm.get('gender').errors?.required && submitClicked" class="alert alert-danger">
+          Gender is required.
+        </div>
+        
+
+            <button type="submit" class="btn btn-primary">Next</button>
+         
+          
+        </form>
+       
+                <div class="container"><br>
+                  <p-progressBar [value]="0"></p-progressBar>
+              </div>
+             
+

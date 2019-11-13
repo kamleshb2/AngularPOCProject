@@ -1,0 +1,35 @@
+
+      <!-- <a routerLink="login">Login</a>
+      <a routerLink="customer-list">Customer</a>
+   <router-outlet></router-outlet> -->
+
+   
+<nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+      <h2 style="color: white"> <i class="fa fa-users" style="font-size:48px" aria-hidden="true"></i> Customer Management</h2>
+      
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+            &nbsp;&nbsp;&nbsp;
+         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item">
+               <a routerLinkActive="active" class="nav-link" routerLink="customer-list">Customers</a>
+               </li>
+
+            <li class="nav-item">
+           <a routerLinkActive="active" class="nav-link" routerLink="about">About</a>
+         </li>
+         <li class="nav-item">
+               <a routerLinkActive="active" class="nav-link" routerLink="orders">Orders</a>
+            </li>
+            <li class="nav-item">
+            <button *ngIf="this.svc.getLoggedIn()" class="btn btn-primary"  (click) = "logout()"> Logout </button>
+           </li>
+         </ul>
+         </div>
+           <!-- <div *ngIf="!loggedInStatus">
+            <button class="btn btn-primary" (click) = "login()" style="color: white"> Login </button>
+           </div> -->
+    </nav>
+    
+    <div class="container-fluid">
+    <router-outlet></router-outlet>
+    </div>

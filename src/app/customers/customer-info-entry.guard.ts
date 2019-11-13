@@ -1,0 +1,22 @@
+import { Injectable } from '@angular/core';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class CustomerInfoEntryGuard implements CanActivate {
+  canActivate(
+    next: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+      console.log(sessionStorage.getItem("customerId"))
+      if(sessionStorage.getItem("customerId")){
+
+        sessionStorage.removeItem("customerId");
+        return true;
+  }
+  else{
+    return true;
+  }
+}
+}

@@ -1,0 +1,29 @@
+
+<form #accountform="ngForm">
+    <!-- <div class="card card-primary">
+        <div class="card card-heading"><h2 class="card card-title">Login</h2><br></div>
+        <div class="card card-body"> -->
+
+<div class="form-group">
+    <label for="email">Email</label>
+    <input id="email" type="email" [formControl]="email" name="email" class="form-control" required><br>
+
+<small *ngIf="email.errors?.required && nextClicked" class="alert alert-danger">
+    Email is required.
+  </small>
+</div>
+<div *ngIf="email.errors?.email" class="alert alert-danger">
+  Email is invalid.
+</div>
+<br>
+
+<button type="submit"  class="btn btn-primary" (click)="previous()">Previous</button> &nbsp;&nbsp;&nbsp;&nbsp;
+ <!-- <button type="submit"  class="btn btn-primary" (click)="next()">Submit</button>  -->
+ <p-toast [style]="{marginTop: '80px'}"></p-toast>
+ <button type="button" pButton (click)="next()" label="Submit" class="ui-button-success"></button>
+        
+</form>
+
+<div class="container"><br>
+  <p-progressBar [value]="90"></p-progressBar>
+      </div>
