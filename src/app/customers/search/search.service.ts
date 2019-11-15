@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class SearchService {
 
-  baseUrl: string = 'http://13.233.101.232:8080/SpringRest/customers';
+  baseUrl: string = 'http://13.233.101.232:8080/SpringRest2/customers';
 
   constructor(private http: HttpClient) { }
 
