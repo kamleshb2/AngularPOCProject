@@ -37,7 +37,7 @@ export class SearchComponent implements OnInit {
         this.filteredMovies = [];
         this.isLoading = true;
       }),
-      switchMap(value => this._searchService.search('http://13.233.101.232:8080/SpringRest2/customers')
+      switchMap(value => this._searchService.search('https://cors-anywhere.herokuapp.com/http://13.233.101.232:8080/SpringRest2/customers')
         .pipe(
           finalize(() => {
             this.isLoading = false;

@@ -21,15 +21,15 @@ export class CustomerService {
    email: string;
 
   GetAllCustomersAsync(): Observable<any> {
-    return this.http.get('http://13.233.101.232:8080/SpringRest2/customers');
+    return this.http.get('https://cors-anywhere.herokuapp.com/http://13.233.101.232:8080/SpringRest2/customers');
   }
 
   GetCustomersByIdAsync(customerId: number): Observable<any> {
-    return this.http.get('http://13.233.101.232:8080/SpringRest2/customer?id=' + customerId);
+    return this.http.get('https://cors-anywhere.herokuapp.com/http://13.233.101.232:8080/SpringRest2/customer?id=' + customerId);
   }
 
   EditCustomersAsync(customer: any): Observable<any> {
-    return this.http.put('http://13.233.101.232:8080/SpringRest2/editcustomer', customer);
+    return this.http.put('https://cors-anywhere.herokuapp.com/http://13.233.101.232:8080/SpringRest2/editcustomer', customer);
   }
 
   AddCustomersAsync(): Observable<any> {
@@ -44,17 +44,17 @@ export class CustomerService {
       email: this.email,
     };
 
-    return this.http.post('http://13.233.101.232:8080/SpringRest2/addcustomer', customer);
+    return this.http.post('https://cors-anywhere.herokuapp.com/http://13.233.101.232:8080/SpringRest2/addcustomer', customer);
   }
 
   DeleteCustomersAsync(customerId: number): Observable<any> {
-    return this.http.delete('http://13.233.101.232:8080/SpringRest2/deletecustomer?id=' + customerId);
+    return this.http.delete('https://cors-anywhere.herokuapp.com/http://13.233.101.232:8080/SpringRest2/deletecustomer?id=' + customerId);
   }
   GetOrdersByIdAsync(orderId: number): Observable<any> {
-    return this.http.get('http://13.233.101.232:8080/SpringRest2/order?id=' + orderId);
+    return this.http.get('https://cors-anywhere.herokuapp.com/http://13.233.101.232:8080/SpringRest2/order?id=' + orderId);
   }
 
   GetAllOrdersAsync(): Observable<any> {
-    return this.http.get('http://13.233.101.232:8080/SpringRest2/orders');
+    return this.http.get('https://cors-anywhere.herokuapp.com/http://13.233.101.232:8080/SpringRest2/orders');
   }
 }
