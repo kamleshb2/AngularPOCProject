@@ -37,7 +37,7 @@ export class SearchComponent implements OnInit {
         this.filteredMovies = [];
         this.isLoading = true;
       }),
-      switchMap(value => this._searchService.search('http://localhost:8080/SpringRest/customers')
+      switchMap(value => this._searchService.search('http://13.233.101.232:8080/SpringRest/customers')
         .pipe(
           finalize(() => {
             this.isLoading = false;

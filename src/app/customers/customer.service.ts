@@ -21,15 +21,15 @@ export class CustomerService {
    email: string;
 
   GetAllCustomersAsync(): Observable<any> {
-    return this.http.get('http://localhost:8080/SpringRest/customers');
+    return this.http.get('http://13.233.101.232:8080/SpringRest/customers');
   }
 
   GetCustomersByIdAsync(customerId: number): Observable<any> {
-    return this.http.get('http://localhost:8080/SpringRest/customer?id=' + customerId);
+    return this.http.get('http://13.233.101.232:8080/SpringRest/customer?id=' + customerId);
   }
 
   EditCustomersAsync(customer: any): Observable<any> {
-    return this.http.put('http://localhost:8080/SpringRest/editcustomer', customer);
+    return this.http.put('http://13.233.101.232:8080/SpringRest/editcustomer', customer);
   }
 
   AddCustomersAsync(): Observable<any> {
@@ -44,17 +44,17 @@ export class CustomerService {
       email: this.email,
     };
 
-    return this.http.post('http://localhost:8080/SpringRest/addcustomer', customer);
+    return this.http.post('http://13.233.101.232:8080/SpringRest/addcustomer', customer);
   }
 
   DeleteCustomersAsync(customerId: number): Observable<any> {
-    return this.http.delete('http://localhost:8080/SpringRest/deletecustomer?id=' + customerId);
+    return this.http.delete('http://13.233.101.232:8080/SpringRest/deletecustomer?id=' + customerId);
   }
   GetOrdersByIdAsync(orderId: number): Observable<any> {
-    return this.http.get('http://localhost:8080/SpringRest/order?id=' + orderId);
+    return this.http.get('http://13.233.101.232:8080/SpringRest/order?id=' + orderId);
   }
 
   GetAllOrdersAsync(): Observable<any> {
-    return this.http.get('http://localhost:8080/SpringRest/orders');
+    return this.http.get('http://13.233.101.232:8080/SpringRest/orders');
   }
 }
